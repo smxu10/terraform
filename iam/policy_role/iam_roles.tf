@@ -1,3 +1,9 @@
+
+data "aws_iam_policy" "s3-policy" {
+  arn = "arn:aws:iam::458109380959:policy/s3access"
+}
+
+
 ###############################
 # Role 1
 ############################### 
@@ -27,6 +33,7 @@ EOF
 data "aws_iam_policy" "ses-policy" {
   arn = "arn:aws:iam::458109380959:policy/sendemail"
 }
+
 resource "aws_iam_role_policy_attachment" "role_ses_policy_attach" {
    role       = aws_iam_role.lambda-com-role.name
    policy_arn = data.aws_iam_policy.ses-policy.arn
@@ -58,6 +65,11 @@ resource "aws_iam_role_policy_attachment" "role_log-full-access_attach" {
    policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
 }
 
+# attache IAM policy 5
+resource "aws_iam_role_policy_attachment" "role_ec2_s3_aacess_attach" {
+   role       = aws_iam_role.lambda-com-role.name
+   policy_arn = data.aws_iam_policy.s3-policy.arn
+}
 
 ###############################
 # Role 2
@@ -83,12 +95,8 @@ resource "aws_iam_role" "s3access-role" {
 EOF
 }
 
+
 # attache IAM policy 1
-data "aws_iam_policy" "s3-policy" {
-  arn = "arn:aws:iam::458109380959:policy/s3access"
-}
-
-
 resource "aws_iam_role_policy_attachment" "role_s3_aacess_attach" {
    role       = aws_iam_role.s3access-role.name
    policy_arn = data.aws_iam_policy.s3-policy.arn
