@@ -32,15 +32,15 @@ resource "aws_iam_role_policy_attachment" "role_ses_policy_attach" {
    policy_arn = data.aws_iam_policy.ses-policy.arn
 }
 
-# attache IAM policy 2
-data "aws_iam_policy" "logs-read-policy" {
-  arn = "arn:aws:iam::458109380959:policy/CloudWatchLogsRead"
-}
+# # attache IAM policy 2
+# data "aws_iam_policy" "logs-read-policy" {
+#   arn = "arn:aws:iam::458109380959:policy/CloudWatchLogsRead"
+# }
 
-resource "aws_iam_role_policy_attachment" "role_logs_policy_attach" {
-   role       = aws_iam_role.lambda-com-role.name
-   policy_arn = data.aws_iam_policy.logs-read-policy.arn
-}
+# resource "aws_iam_role_policy_attachment" "role_logs_policy_attach" {
+#    role       = aws_iam_role.lambda-com-role.name
+#    policy_arn = data.aws_iam_policy.logs-read-policy.arn
+# }
 
 # attache IAM policy 3
 data "aws_iam_policy" "ec2-describe" {
