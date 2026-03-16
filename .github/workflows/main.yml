@@ -24,7 +24,7 @@ jobs:
         working-directory: s3
     steps:
       - name: Checkout Source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Print Greeting # Name of the step
         run: echo "Hello World!  " # Command to run
