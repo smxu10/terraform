@@ -24,56 +24,40 @@ jobs:
       run:
         working-directory: s3
     steps:
-      # - name: Clean build artifacts
-      #   run: |
-      #     del /S /F /Q bin obj
-      #   shell: cmd
-
-      # - name: Disable Git fsmonitor
-      #   run: git config --global core.fsmonitor false
 
       - name: Checkout Source
         uses: actions/checkout@v4
         with:
-          # node-version: 24
           set-safe-directory: false
-          # cache: 'npm' # Optional: Caches npm dependencies for faster installs
-   
-      # - name: Retry directory removal (workaround for file locks)
-      #   if: failure() # Only run if the previous step failed
-      #   run: |
-      #     :1
-      #     rd /s /q "%inputPath%" 2>nul
-      #     if exist "%inputPath%\" goto 1
-      #   shell: cmd
+
 
       - name: Print Greeting # Name of the step
         run: echo "Hello World!  " # Command to run
 
-      # - name: configure aws credentials using OIDC
-      #   uses: aws-actions/configure-aws-credentials@v4.1.0
-      #   with:
-      #     role-to-assume: arn:aws:iam::287243894258:role/gitaction-iam-ssm-lambda-role #${{ env.AWS_IAM_ROLE }}
-      #     aws-region: us-east-1  #${{ env.AWS_REGION }}
+      - name: configure aws credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          role-to-assume: arn:aws:iam::287243894258:role/gitaction-iam-ssm-lambda-role #${{ env.AWS_IAM_ROLE }}
+          aws-region: us-east-1  #${{ env.AWS_REGION }}
       
-      # - name: Test AWS Credential
-      #   run: aws sts get-caller-identity
+      - name: Test AWS Credential
+        run: aws sts get-caller-identity
 
-      # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v2
-      #   with:
-      #     terraform_version: 1.0.1
-      #     terraform_wrapper: false
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.1
+          terraform_wrapper: false
 
-      # - name: Terraform Format
-      #   id: fmt
-      #   run: terraform fmt -check
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
 
-      # - name: Terraform Init
-      #   id: init
-      #   run: terraform init
+      - name: Terraform Init
+        id: init
+        run: terraform init
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -no-color
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
 
