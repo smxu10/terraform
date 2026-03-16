@@ -1,4 +1,4 @@
-name: test from shlf-hosted server
+name: test 
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   self-host:
-    name: s3
+    name: hello
     runs-on: self-hosted
     # env:
       # AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
