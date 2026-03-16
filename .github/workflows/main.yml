@@ -23,6 +23,11 @@ jobs:
       run:
         working-directory: s3
     steps:
+      - name: Clean build artifacts
+        run: |
+          del /S /F /Q bin obj
+        shell: cmd
+        
       - name: Checkout Source
         uses: actions/checkout@v2
 
