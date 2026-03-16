@@ -22,7 +22,7 @@ jobs:
         working-directory: s3
     steps:
       - name: Checkout Source
-      - user: actions/checkout@v3
+      - user: actions/checkout@v2
 
       - name: configure aws credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v2
