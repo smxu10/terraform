@@ -40,6 +40,12 @@ jobs:
       #     if exist "%inputPath%\" goto 1
       #   shell: cmd
 
+      - name: 'Cleanup build folder'
+        run: |
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+        # Use 'del' and 'rd /s /q' for Windows runners
+
       - name: Checkout Source
         uses: actions/checkout@v4
         with:
