@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Print Greeting # Name of the step
-        run: echo "Hello World!" # Command to run
+        run: echo "Hello World!  " # Command to run
 
       # - name: configure aws credentials using OIDC
       #   uses: aws-actions/configure-aws-credentials@v4.1.0
