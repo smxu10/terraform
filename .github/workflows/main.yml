@@ -20,7 +20,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+        working-directory: ${{ env.dev/WORKING_DIRECTORY }}
     steps:
 
       - name: Checkout Source
