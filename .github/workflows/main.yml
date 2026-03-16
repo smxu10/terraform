@@ -14,9 +14,11 @@ jobs:
   terrafrom:
     name: terrafrom
     runs-on: ubuntu-latests
-    # env:
+    env:
     #   AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
     #   AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     defaults:
       run:
         working-directory: s3
@@ -24,18 +26,30 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
 
-      - name: configure aws credentials using OIDC
-        uses: aws-actions/configure-aws-credentials@v4.1.0
-        with:
-          role-to-assume: arn:aws:iam::287243894258:role/gitaction-iam-ssm-lambda-role #${{ env.AWS_IAM_ROLE }}
-          aws-region: us-east-1  #${{ env.AWS_REGION }}
+      # - name: configure aws credentials using OIDC
+      #   uses: aws-actions/configure-aws-credentials@v4.1.0
+      #   with:
+      #     role-to-assume: arn:aws:iam::287243894258:role/gitaction-iam-ssm-lambda-role #${{ env.AWS_IAM_ROLE }}
+      #     aws-region: us-east-1  #${{ env.AWS_REGION }}
       
-      - name: Test AWS Credential
-        run: aws sts get-caller-identity
+      # - name: Test AWS Credential
+      #   run: aws sts get-caller-identity
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.0.1
           terraform_wrapper: false
+          
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
 
