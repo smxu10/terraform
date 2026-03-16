@@ -17,10 +17,11 @@ jobs:
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       AWS_REGION: us-east-1
+      WORKING_DIRECTORY: ${{ var.WORKING_DIRECTORY }}
 
     defaults:
       run:
-        working-directory: ${{ var.WORKING_DIRECTORY }}
+        working-directory: ${{ env.WORKING_DIRECTORY }}
     steps:
 
       - name: Checkout Source
@@ -29,14 +30,14 @@ jobs:
           set-safe-directory: false 
 
 
-      - name: Print Greeting 
+      - name: Print Greeting s
         run: echo "Hello World!" 
 
       - name: configure aws credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
           role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
-          aws-region: ${{ dev.var.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
       
       - name: Test AWS Credential
         run: aws sts get-caller-identity
