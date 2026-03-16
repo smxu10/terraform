@@ -1,13 +1,3 @@
-﻿variable "region" {
-  type    = string
-  default = "us-ease-1"
-}
-
-variable "bucket_name" {
-  type    = string
-  default = "seantest-bucket-1"
-}
-
 provider "aws" {
   region = var.region
 }
