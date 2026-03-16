@@ -18,11 +18,11 @@ jobs:
       # FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: ${{ vars.FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 }}
       AWS_REGION: us-east-1
-      # WORKING_DIRECTORY: ${{ vars.WORKING_DIRECTORY }}
+      WORKING_DIRECTORY: s3  #${{ vars.WORKING_DIRECTORY }}
 
     defaults:
       run:
-        working-directory: ${{ vars.WORKING_DIRECTORY }}
+        working-directory: ${{ env.WORKING_DIRECTORY }}
     steps:
 
       - name: Checkout Source
@@ -49,15 +49,18 @@ jobs:
           terraform_version: ">= 1.5.0"
           terraform_wrapper: false
 
-      # - name: Terraform Format
-      #   id: fmt
-      #   run: terraform fmt
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt
 
-      # - name: Terraform Init
-      #   id: init
-      #   run: terraform init
+      - name: Terraform Init
+        id: init
+        run: terraform init
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -no-color
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
