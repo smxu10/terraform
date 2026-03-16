@@ -1,0 +1,10 @@
+name: First Workflow # Name of your workflow
+
+on: [push] # Trigger the workflow on a push event
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest # The type of runner machine to use
+    steps:
+    - name: Print Greeting # Name of the step
+      run: echo "Hello World!" # Command to run
