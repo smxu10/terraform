@@ -22,11 +22,12 @@ jobs:
         working-directory: s3
     steps:
       - name: Checkout Source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: configure aws credentials using OIDC
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
+          audience: sts.amazonaws.com
           role-to-assume: arn:aws:iam::287243894258:role/gitaction-iam-ssm-lambda-role #${{ env.AWS_IAM_ROLE }}
           aws-region: us-east-1  #${{ env.AWS_REGION }}
       
