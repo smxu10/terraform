@@ -32,9 +32,6 @@ jobs:
       # - name: Disable Git fsmonitor
       #   run: git config --global core.fsmonitor false
 
-      - name: Fix permissions
-        run: chmod -R u+rwX .
-
       - name: Checkout Source
         uses: actions/checkout@v4
         with:
