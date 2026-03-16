@@ -13,7 +13,7 @@ permissions:
 jobs:
   self-host:
     name: s3
-    runs-on: ubuntu-latests
+    runs-on: self-hosted
     # env:
       # AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
       # AWS_REGION: us-east-1
