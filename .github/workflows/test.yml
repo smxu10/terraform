@@ -1,0 +1,7 @@
+---
+name: Create S3 bucket
+on:
+  workflow_run:
+    workflows: [Run Tests]
+    types:
+      - completed
