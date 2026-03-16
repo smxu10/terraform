@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   self-host:
-    name: hello
+    name: hello-new
     runs-on: self-hosted
     # env:
       # AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
@@ -23,13 +23,13 @@ jobs:
       run:
         working-directory: s3
     steps:
-      - name: Clean build artifacts
-        run: |
-          del /S /F /Q bin obj
-        shell: cmd
+      # - name: Clean build artifacts
+      #   run: |
+      #     del /S /F /Q bin obj
+      #   shell: cmd
 
-      - name: Disable Git fsmonitor
-        run: git config --global core.fsmonitor false
+      # - name: Disable Git fsmonitor
+      #   run: git config --global core.fsmonitor false
 
       - name: Retry directory removal (workaround for file locks)
         if: failure() # Only run if the previous step failed
