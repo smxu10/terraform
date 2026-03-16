@@ -1,4 +1,4 @@
-name: Create S3 bucket
+name: test from shlf-hosted server
 
 on:
   push:
