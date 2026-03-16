@@ -14,9 +14,9 @@ jobs:
   terrafrom:
     name: terrafrom
     runs-on: ubuntu-latests
-    env:
-      AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
-      AWS_REGION: us-east-1
+    # env:
+    #   AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
+    #   AWS_REGION: us-east-1
     defaults:
       run:
         working-directory: s3
@@ -27,8 +27,8 @@ jobs:
       - name: configure aws credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ${{ env.AWS_IAM_ROLE }}
-          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::287243894258:role/gitaction-iam-ssm-lambda-role #${{ env.AWS_IAM_ROLE }}
+          aws-region: us-east-1  #${{ env.AWS_REGION }}
       
       - name: Test AWS Credential
         run: aws sts get-caller-identity
