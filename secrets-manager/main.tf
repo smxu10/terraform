@@ -13,6 +13,6 @@ resource "aws_secretsmanager_secret_version" "opensearch_credential_val" {
   secret_id = aws_secretsmanager_secret.opensearch_credential.id
   secret_string = jsonencode({
     username = "admin"
-    password = "super-secret-password-123" # will be changed manually in AWS condole after it was created
+    password = "super-secret-password-123" # will be changed manually in AWS console after it was created
   })
 }
