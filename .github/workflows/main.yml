@@ -1,0 +1,66 @@
+name: new-test 
+
+on:
+  push:
+    branchs:
+    - main
+    - release
+
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
+jobs:
+  self-host:
+    name: hello-new
+    runs-on: self-hosted
+    env:
+      # FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: ${{ vars.FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 }}
+      AWS_REGION: us-east-1
+      WORKING_DIRECTORY: s3  #${{ vars.WORKING_DIRECTORY }}
+
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+    steps:
+
+      - name: Checkout Source
+        uses: actions/checkout@v4
+        with:
+          set-safe-directory: false 
+
+
+      - name: Print Greeting s
+        run: echo "Hello World!" 
+
+      - name: configure aws credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Test AWS Credential
+        run: aws sts get-caller-identity
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ">= 1.5.0"
+          terraform_wrapper: false
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
