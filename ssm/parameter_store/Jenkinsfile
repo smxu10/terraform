@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('terraform') {
+            steps {
+                bat '''
+                  ./terraform init
+                  ./terraform plan
+                '''
+            }
+        }
+    }
+}
