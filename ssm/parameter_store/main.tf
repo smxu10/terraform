@@ -7,12 +7,12 @@ terraform {
   }
   required_version = ">= 1.3.0"
 
-  backend "s3" {
-    bucket = "backend-sean-1"
-    key    = "tfstates/ssm/parameterstore/terraform.tfstate"
-    acl    = "bucket-owner-full-control"
-    region = "us-east-1"
-  }
+  # backend "s3" {
+  #   bucket = "backend-sean-1"
+  #   key    = "tfstates/ssm/parameterstore/terraform.tfstate"
+  #   acl    = "bucket-owner-full-control"
+  #   region = "us-east-1"
+  # }
 }
 
 provider "aws" {
