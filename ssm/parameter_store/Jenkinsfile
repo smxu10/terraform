@@ -9,6 +9,7 @@ pipeline {
                     bat '''
                       aws s3 ls
                       terraform init
+                      terraform plan
                      '''
                   }
 
