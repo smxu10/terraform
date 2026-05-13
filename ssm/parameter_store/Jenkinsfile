@@ -7,9 +7,14 @@ pipeline {
         stage('terraform') {
             steps {
                 dir('ssm/parameter_store'){
-                  bat '''
-                    terraform init
-                  '''
+                  withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    echo 'Hello'
+                    bat '''
+                      aws s3 ls
+                      terraform init
+                     '''
+                  }
+
                 }
             }
         }
