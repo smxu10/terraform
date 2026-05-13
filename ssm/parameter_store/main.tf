@@ -15,6 +15,10 @@ terraform {
   }
 }
 
+provider "aws" {
+  region = "us-east-1"
+}
+
 resource "aws_ssm_parameter" "db_dev" {
   name        = "/db/dev/ms_user"
   description = "Dev DB master user name"
