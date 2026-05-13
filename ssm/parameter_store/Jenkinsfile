@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    environment {
+        AWS_PROFILE = 'default'
+        AWS_SDK_LOAD_CONFIG = 'true' // Recommended for profile loading
+    }
     stages {
         stage('terraform') {
             steps {
