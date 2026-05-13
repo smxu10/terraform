@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        AWS_PROFILE = 'default'
-    }
     stages {
         stage('terraform') {
             steps {
