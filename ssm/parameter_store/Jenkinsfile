@@ -10,7 +10,7 @@ pipeline {
                       aws s3 ls
                       terraform init
                       terraform plan
-                      terrafrom apply -auto-approve
+                      terraform apply -auto-approve
                      '''
                   }
 
