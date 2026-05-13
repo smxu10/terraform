@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         AWS_PROFILE = 'default'
-        AWS_SDK_LOAD_CONFIG = 'true' // Recommended for profile loading
     }
     stages {
         stage('terraform') {
@@ -10,7 +9,6 @@ pipeline {
                 dir('ssm/parameter_store'){
                   bat '''
                     terraform init
-                    terraform plan
                   '''
                 }
             }
