@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('terraform') {
             steps {
-                dir('ssm/parameter_store'){} 
+                dir('ssm/parameter_store'){
                   bat '''
                     terraform init
                     terraform plan
